@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const Header = () => {
+  const isLogin = useSelector((state: RootState) => state.login.isLogin);
   return (
     <div>
       <nav className="navbar navbar-light">
@@ -15,26 +18,34 @@ const Header = () => {
                 Home
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/editor">
-                <i className="ion-compose"></i>&nbsp;New Article
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="settings">
-                <i className="ion-gear-a"></i>&nbsp;Settings
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/signin">
-                Sign in
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/signup">
-                Sign up
-              </a>
-            </li>
+            {isLogin ? (
+              <>
+                <li className="nav-item">
+                  <a className="nav-link" href="/editor">
+                    <i className="ion-compose"></i>&nbsp;New Article
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a className="nav-link" href="settings">
+                    <i className="ion-gear-a"></i>&nbsp;Settings
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <a className="nav-link" href="/signin">
+                    Sign in
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/signup">
+                    Sign up
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
