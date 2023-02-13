@@ -1,9 +1,22 @@
+/* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../store';
+import { loginActions } from '../store/Loginslice';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLogin = useSelector((state: RootState) => state.login.isLogin);
+
+  const logoutHandler = (e: any) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    dispatch(loginActions.logout());
+    navigate('/');
+  };
+
   return (
     <div>
       <nav className="navbar navbar-light">
@@ -25,11 +38,15 @@ const Header = () => {
                     <i className="ion-compose"></i>&nbsp;New Article
                   </a>
                 </li>
-
                 <li className="nav-item">
                   <a className="nav-link" href="settings">
                     <i className="ion-gear-a"></i>&nbsp;Settings
                   </a>
+                </li>
+                <li className="nav-item" onClick={logoutHandler}>
+                  <div className="nav-link">
+                    <i className="ion-gear-a"></i>&nbsp;Logout
+                  </div>
                 </li>
               </>
             ) : (
