@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
 import Create from './pages/Create';
-import Article from './pages/Article';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/editor" element={<Create />} />
-        <Route path="/signin" element={<Register />} />
-        <Route path="/article/:id" element={<Article />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
         <Route path="/profile/:username" element={<Profile />} />
       </Routes>
       <Footer />
