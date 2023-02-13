@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -9,8 +9,17 @@ import Register from './pages/Register';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './pages/Login';
+import { useDispatch } from 'react-redux';
+import { loginActions } from './store/Loginslice';
 
 function App() {
+  const dispatch = useDispatch();
+  const localStorageToken: string | null = localStorage.getItem('token');
+  useEffect(() => {
+    if (localStorageToken) {
+      dispatch(loginActions.login());
+    }
+  }, [dispatch, localStorageToken]);
   return (
     <BrowserRouter>
       <Header />
